@@ -1,3 +1,4 @@
+import * as Immutable from 'immutable';
 import * as ImmutableUtils from './schemas/ImmutableUtils';
 import EntitySchema from './schemas/Entity';
 import UnionSchema from './schemas/Union';
@@ -21,16 +22,10 @@ const visit = (value, parent, key, schema, addEntity) => {
 const addEntities = (entities) => (schema, processedEntity, value, parent, key) => {
   const schemaKey = schema.key;
   const id = schema.getId(value, parent, key);
-  if (!(schemaKey in entities)) {
-    entities[schemaKey] = {};
-  }
 
-  const existingEntity = entities[schemaKey][id];
-  if (existingEntity) {
-    entities[schemaKey][id] = schema.merge(existingEntity, processedEntity);
-  } else {
-    entities[schemaKey][id] = processedEntity;
-  }
+  return entities.updateIn([schemaKey, id], processedEntity, (existingEntity) =>
+    schema.merge(existingEntity, processedEntity)
+  );
 };
 
 export const schema = {
@@ -46,10 +41,12 @@ export const normalize = (input, schema) => {
     throw new Error(`Unexpected input given to normalize. Expected type to be "object", found "${typeof input}".`);
   }
 
-  const entities = {};
-  const addEntity = addEntities(entities);
+  let result;
+  const entities = Immutable.Map().withMutations((map) => {
+    const addEntity = addEntities(map);
+    result = visit(input, input, null, schema, addEntity);
+  });
 
-  const result = visit(input, input, null, schema, addEntity);
   return { entities, result };
 };
 

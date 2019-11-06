@@ -122,9 +122,9 @@ Immutable.Map {
 
 exports[`ArraySchema normalization Class filters out undefined and null normalized values 1`] = `
 Object {
-  "entities": Object {
-    "user": Object {
-      "123": Object {
+  "entities": Immutable.Map {
+    "user": Immutable.Map {
+      123: Object {
         "id": 123,
       },
     },
@@ -137,12 +137,12 @@ Object {
 
 exports[`ArraySchema normalization Class normalizes Objects using their values 1`] = `
 Object {
-  "entities": Object {
-    "user": Object {
-      "1": Object {
+  "entities": Immutable.Map {
+    "user": Immutable.Map {
+      1: Object {
         "id": 1,
       },
-      "2": Object {
+      2: Object {
         "id": 2,
       },
     },
@@ -156,12 +156,12 @@ Object {
 
 exports[`ArraySchema normalization Class normalizes a single entity 1`] = `
 Object {
-  "entities": Object {
-    "cats": Object {
-      "1": Object {
+  "entities": Immutable.Map {
+    "cats": Immutable.Map {
+      1: Object {
         "id": 1,
       },
-      "2": Object {
+      2: Object {
         "id": 2,
       },
     },
@@ -175,8 +175,8 @@ Object {
 
 exports[`ArraySchema normalization Class normalizes multiple entities 1`] = `
 Object {
-  "entities": Object {
-    "cats": Object {
+  "entities": Immutable.Map {
+    "cats": Immutable.Map {
       "123": Object {
         "id": "123",
         "type": "cats",
@@ -186,7 +186,7 @@ Object {
         "type": "cats",
       },
     },
-    "person": Object {
+    "person": Immutable.Map {
       "123": Object {
         "id": "123",
         "type": "people",
@@ -396,12 +396,12 @@ Array [
 
 exports[`ArraySchema normalization Object normalizes Objects using their values 1`] = `
 Object {
-  "entities": Object {
-    "user": Object {
-      "1": Object {
+  "entities": Immutable.Map {
+    "user": Immutable.Map {
+      1: Object {
         "id": 1,
       },
-      "2": Object {
+      2: Object {
         "id": 2,
       },
     },
@@ -415,12 +415,12 @@ Object {
 
 exports[`ArraySchema normalization Object normalizes plain arrays as shorthand for ArraySchema 1`] = `
 Object {
-  "entities": Object {
-    "user": Object {
-      "1": Object {
+  "entities": Immutable.Map {
+    "user": Immutable.Map {
+      1: Object {
         "id": 1,
       },
-      "2": Object {
+      2: Object {
         "id": 2,
       },
     },
@@ -434,17 +434,17 @@ Object {
 
 exports[`ArraySchema normalization Object passes its parent to its children when normalizing 1`] = `
 Object {
-  "entities": Object {
-    "children": Object {
-      "4": Object {
+  "entities": Immutable.Map {
+    "children": Immutable.Map {
+      4: Object {
         "content": "child",
         "id": 4,
         "parentId": 1,
         "parentKey": "children",
       },
     },
-    "parents": Object {
-      "1": Object {
+    "parents": Immutable.Map {
+      1: Object {
         "children": Array [
           4,
         ],

@@ -1,3 +1,5 @@
+import * as Immutable from 'immutable'
+
 declare namespace schema {
   export type StrategyFunction = (value: any, parent: any, key: string) => any;
   export type SchemaFunction = (value: any, parent: any, key: string) => string;
@@ -53,7 +55,7 @@ export function normalize(
   data: any,
   schema: Schema
 ): {
-  entities: any,
+  entities: Immutable.Map<any, any>,
   result: any
 };
 
