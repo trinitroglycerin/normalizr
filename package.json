@@ -10,20 +10,20 @@
   },
   "keywords": ["flux", "redux", "normalize", "denormalize", "api", "json"],
   "files": ["dist/", "index.d.ts", "LICENSE", "README.md"],
-  "main": "dist/normalizr.js",
-  "module": "dist/normalizr.es.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "typings": "index.d.ts",
   "sideEffects": false,
+  "jest": {
+    "testURL": "http://localhost"
+  },
   "scripts": {
-    "build": "npm run clean && npm-run-all --parallel build:*",
-    "build:development": "NODE_ENV=development rollup -c",
-    "build:production": "NODE_ENV=production rollup -c",
-    "clean": "rimraf dist",
-    "flow": "flow",
-    "lint": "eslint --fix .",
-    "lint:ci": "eslint .",
+    "build": "npm-run-all build:*",
+    "build:cjs": "tsc -p tsconfig.json",
+    "build:es": "tsc -p tsconfig.es.json",
+    "clean": "rimraf dist es",
     "prebuild": "npm run clean",
-    "precommit": "flow check && lint-staged",
+    "precommit": "tsc --noEmit",
     "prepublishOnly": "npm run build",
     "test": "jest",
     "test:ci": "jest --ci",
@@ -33,40 +33,27 @@
   "contributors": ["Dan Abramov", "Dan Pantry"],
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^7.1.1",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "coveralls": "^2.11.15",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-jest": "^21.15.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "flow-bin": "^0.65.0",
     "husky": "^0.14.3",
-    "immutable": "^4.0.0-rc.12",
-    "jest": "^22.4.3",
+    "jest": "24",
     "lint-staged": "^6.1.0",
     "npm-run-all": "^3.1.2",
     "prettier": "^1.12.1",
     "rimraf": "^2.5.4",
-    "rollup": "^0.54.1",
-    "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-filesize": "^1.5.0",
-    "rollup-plugin-uglify": "^3.0.0",
-    "typescript": "^3.0.0",
-    "typescript-definition-tester": "0.0.5",
-    "uglify-es": "^3.3.8"
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
   },
-  "dependencies": {},
   "lint-staged": {
     "src/**/*.js": ["test", "git add"],
     "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "peerDependencies": {
-    "immutable": "^3.8.1"
+    "immutable": "^4.0.0-rc.12"
   },
-  "private": false
+  "private": false,
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
 }

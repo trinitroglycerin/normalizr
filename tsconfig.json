@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "noEmitOnError": true,
+    "target": "es5",
+    "module": "commonjs",
+    "allowJs": true,
+    "outDir": "dist/",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es6", "dom", "dom.iterable"],
+    "moduleResolution": "node",
+    "declaration": true
+  },
+  "include": ["src/**/*.js"],
+  "exclude": ["src/**/__tests__/"]
+}

@@ -2,6 +2,7 @@
 
 node_modules/*
 dist/*
+es/*
 *.log
 coverage/*
 .coveralls.yml
