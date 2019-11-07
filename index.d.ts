@@ -51,11 +51,13 @@ export type Schema =
   schema.Values[] |
   {[key: string]: Schema | Schema[]};
 
-export function normalize(
+export type Entities<T, K> = Immutable.Map<T, Immutable.Map<K, unknown>>
+
+export function normalize<T = unknown, K = unknown>(
   data: any,
   schema: Schema
 ): {
-  entities: Immutable.Map<any, any>,
+  entities: Entities<T, K>
   result: any
 };
 
