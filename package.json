@@ -1,6 +1,6 @@
 {
   "name": "@danpantry/normalizr-immutable",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description":
     "Normalizes and denormalizes JSON according to schema for Redux and Flux applications using ImmutableJS",
   "homepage": "https://github.com/danpantry/normalizr",
