@@ -1,5 +1,6 @@
 // eslint-env jest
 import { denormalize, normalize, schema } from '../';
+import Immutable from 'immutable';
 
 describe('normalize', () => {
   [42, null, undefined, '42', () => {}].forEach((input) => {
@@ -165,6 +166,15 @@ describe('denormalize', () => {
       }
     };
     expect(denormalize([1, 2], [mySchema], entities)).toMatchSnapshot();
+  });
+
+  test('will correctly denormalize schemas with numeric ids', () => {
+    const mySchema = new schema.Entity('tacos');
+    const entities = Immutable.Map({
+      tacos: Immutable.Map([[1, { id: 1, type: 'foo' }], [2, { id: 2, type: 'bar' }]])
+    });
+
+    expect(denormalize([1, 2], [mySchema], entities)).toEqual([{ id: 1, type: 'foo' }, { id: 2, type: 'bar' }]);
   });
 
   test('denormalizes nested entities', () => {

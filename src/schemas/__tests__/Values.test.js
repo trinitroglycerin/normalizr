@@ -92,8 +92,8 @@ describe(`${schema.Values.name} denormalization`, () => {
     expect(
       denormalize(
         {
-          fido: { id: 1, schema: 'dogs' },
-          fluffy: { id: 1, schema: 'cats' }
+          fido: { id: '1', schema: 'dogs' },
+          fluffy: { id: '1', schema: 'cats' }
         },
         valuesSchema,
         entities
@@ -103,8 +103,8 @@ describe(`${schema.Values.name} denormalization`, () => {
     expect(
       denormalize(
         {
-          fido: { id: 1, schema: 'dogs' },
-          fluffy: { id: 1, schema: 'cats' }
+          fido: { id: '1', schema: 'dogs' },
+          fluffy: { id: '1', schema: 'cats' }
         },
         valuesSchema,
         fromJS(entities)

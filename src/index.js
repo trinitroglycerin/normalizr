@@ -50,31 +50,35 @@ export const normalize = (input, schema) => {
   return { entities, result };
 };
 
+/**
+ * @param {Map<string, Map<unknown, unknown>>} cache The cache which will store entities as this function recurses. This is *not* an Immutable.Map, but a standard ES6 Map.
+ */
 const unvisitEntity = (id, schema, unvisit, getEntity, cache) => {
   const entity = getEntity(id, schema);
   if (typeof entity !== 'object' || entity === null) {
     return entity;
   }
 
-  if (!cache[schema.key]) {
-    cache[schema.key] = {};
+  if (!cache.has(schema.key)) {
+    cache.set(schema.key, new Map());
   }
 
-  if (!cache[schema.key][id]) {
+  const entities = cache.get(schema.key);
+  if (!entities.has(id)) {
     // Ensure we don't mutate it non-immutable objects
     const entityCopy = ImmutableUtils.isImmutable(entity) ? entity : { ...entity };
 
     // Need to set this first so that if it is referenced further within the
     // denormalization the reference will already exist.
-    cache[schema.key][id] = entityCopy;
-    cache[schema.key][id] = schema.denormalize(entityCopy, unvisit);
+    entities.set(id, entityCopy);
+    entities.set(id, schema.denormalize(entityCopy, unvisit));
   }
 
-  return cache[schema.key][id];
+  return entities.get(id);
 };
 
 const getUnvisit = (entities) => {
-  const cache = {};
+  const cache = new Map();
   const getEntity = getEntities(entities);
 
   return function unvisit(input, schema) {
@@ -105,7 +109,7 @@ const getEntities = (entities) => {
       return entityOrId;
     }
 
-    return isImmutable ? entities.getIn([schemaKey, entityOrId.toString()]) : entities[schemaKey][entityOrId];
+    return isImmutable ? entities.getIn([schemaKey, entityOrId]) : entities[schemaKey][entityOrId];
   };
 };
 

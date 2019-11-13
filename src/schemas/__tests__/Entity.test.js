@@ -121,11 +121,11 @@ describe(`${schema.Entity.name} denormalization`, () => {
     const mySchema = new schema.Entity('tacos');
     const entities = {
       tacos: {
-        1: { id: 1, type: 'foo' }
+        1: { id: '1', type: 'foo' }
       }
     };
-    expect(denormalize(1, mySchema, entities)).toMatchSnapshot();
-    expect(denormalize(1, mySchema, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize('1', mySchema, entities)).toMatchSnapshot();
+    expect(denormalize('1', mySchema, fromJS(entities))).toMatchSnapshot();
   });
 
   test('denormalizes deep entities', () => {
@@ -136,19 +136,19 @@ describe(`${schema.Entity.name} denormalization`, () => {
 
     const entities = {
       menus: {
-        1: { id: 1, food: 1 },
-        2: { id: 2 }
+        1: { id: '1', food: '1' },
+        2: { id: '2' }
       },
       foods: {
-        1: { id: 1 }
+        1: { id: '1' }
       }
     };
 
-    expect(denormalize(1, menuSchema, entities)).toMatchSnapshot();
-    expect(denormalize(1, menuSchema, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize('1', menuSchema, entities)).toMatchSnapshot();
+    expect(denormalize('1', menuSchema, fromJS(entities))).toMatchSnapshot();
 
-    expect(denormalize(2, menuSchema, entities)).toMatchSnapshot();
-    expect(denormalize(2, menuSchema, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize('2', menuSchema, entities)).toMatchSnapshot();
+    expect(denormalize('2', menuSchema, fromJS(entities))).toMatchSnapshot();
   });
 
   test('denormalizes to undefined for missing data', () => {
@@ -159,18 +159,18 @@ describe(`${schema.Entity.name} denormalization`, () => {
 
     const entities = {
       menus: {
-        1: { id: 1, food: 2 }
+        1: { id: '1', food: '2' }
       },
       foods: {
-        1: { id: 1 }
+        1: { id: '1' }
       }
     };
 
-    expect(denormalize(1, menuSchema, entities)).toMatchSnapshot();
-    expect(denormalize(1, menuSchema, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize('1', menuSchema, entities)).toMatchSnapshot();
+    expect(denormalize('1', menuSchema, fromJS(entities))).toMatchSnapshot();
 
-    expect(denormalize(2, menuSchema, entities)).toMatchSnapshot();
-    expect(denormalize(2, menuSchema, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize('2', menuSchema, entities)).toMatchSnapshot();
+    expect(denormalize('2', menuSchema, fromJS(entities))).toMatchSnapshot();
   });
 
   test('denormalizes deep entities with records', () => {
@@ -184,19 +184,19 @@ describe(`${schema.Entity.name} denormalization`, () => {
 
     const entities = {
       menus: {
-        1: new Menu({ id: 1, food: 1 }),
-        2: new Menu({ id: 2 })
+        1: new Menu({ id: '1', food: '1' }),
+        2: new Menu({ id: '2' })
       },
       foods: {
-        1: new Food({ id: 1 })
+        1: new Food({ id: '1' })
       }
     };
 
-    expect(denormalize(1, menuSchema, entities)).toMatchSnapshot();
-    expect(denormalize(1, menuSchema, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize('1', menuSchema, entities)).toMatchSnapshot();
+    expect(denormalize('1', menuSchema, fromJS(entities))).toMatchSnapshot();
 
-    expect(denormalize(2, menuSchema, entities)).toMatchSnapshot();
-    expect(denormalize(2, menuSchema, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize('2', menuSchema, entities)).toMatchSnapshot();
+    expect(denormalize('2', menuSchema, fromJS(entities))).toMatchSnapshot();
   });
 
   test('can denormalize already partially denormalized data', () => {
@@ -214,8 +214,8 @@ describe(`${schema.Entity.name} denormalization`, () => {
       }
     };
 
-    expect(denormalize(1, menuSchema, entities)).toMatchSnapshot();
-    expect(denormalize(1, menuSchema, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize('1', menuSchema, entities)).toMatchSnapshot();
+    expect(denormalize('1', menuSchema, fromJS(entities))).toMatchSnapshot();
   });
 
   test('denormalizes recursive dependencies', () => {

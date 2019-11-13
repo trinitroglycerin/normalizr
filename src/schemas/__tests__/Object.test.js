@@ -34,9 +34,9 @@ describe(`${schema.Object.name} denormalization`, () => {
         1: { id: 1, name: 'Nacho' }
       }
     };
-    expect(denormalize({ user: 1 }, object, entities)).toMatchSnapshot();
-    expect(denormalize({ user: 1 }, object, fromJS(entities))).toMatchSnapshot();
-    expect(denormalize(fromJS({ user: 1 }), object, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize({ user: '1' }, object, entities)).toMatchSnapshot();
+    expect(denormalize({ user: '1' }, object, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize(fromJS({ user: '1' }), object, fromJS(entities))).toMatchSnapshot();
   });
 
   test('denormalizes plain object shorthand', () => {
@@ -46,8 +46,8 @@ describe(`${schema.Object.name} denormalization`, () => {
         1: { id: 1, name: 'Jane' }
       }
     };
-    expect(denormalize({ user: 1 }, { user: userSchema, tacos: {} }, entities)).toMatchSnapshot();
-    expect(denormalize({ user: 1 }, { user: userSchema, tacos: {} }, fromJS(entities))).toMatchSnapshot();
-    expect(denormalize(fromJS({ user: 1 }), { user: userSchema, tacos: {} }, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize({ user: '1' }, { user: userSchema, tacos: {} }, entities)).toMatchSnapshot();
+    expect(denormalize({ user: '1' }, { user: userSchema, tacos: {} }, fromJS(entities))).toMatchSnapshot();
+    expect(denormalize(fromJS({ user: '1' }), { user: userSchema, tacos: {} }, fromJS(entities))).toMatchSnapshot();
   });
 });

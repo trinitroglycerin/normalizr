@@ -95,12 +95,12 @@ describe(`${schema.Array.name} denormalization`, () => {
       const cats = new schema.Entity('cats');
       const entities = {
         cats: {
-          1: { id: 1, name: 'Milo' },
-          2: { id: 2, name: 'Jake' }
+          '1': { id: 1, name: 'Milo' },
+          '2': { id: 2, name: 'Jake' }
         }
       };
-      expect(denormalize([1, 2], [cats], entities)).toMatchSnapshot();
-      expect(denormalize([1, 2], [cats], fromJS(entities))).toMatchSnapshot();
+      expect(denormalize(['1', '2'], [cats], entities)).toMatchSnapshot();
+      expect(denormalize(['1', '2'], [cats], fromJS(entities))).toMatchSnapshot();
     });
 
     test('returns the input value if is not an array', () => {
@@ -130,8 +130,8 @@ describe(`${schema.Array.name} denormalization`, () => {
         }
       };
       const catList = new schema.Array(cats);
-      expect(denormalize([1, 2], catList, entities)).toMatchSnapshot();
-      expect(denormalize([1, 2], catList, fromJS(entities))).toMatchSnapshot();
+      expect(denormalize(['1', '2'], catList, entities)).toMatchSnapshot();
+      expect(denormalize(['1', '2'], catList, fromJS(entities))).toMatchSnapshot();
     });
 
     test('denormalizes multiple entities', () => {
